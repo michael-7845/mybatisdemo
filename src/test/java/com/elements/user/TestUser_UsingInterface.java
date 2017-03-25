@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class TestUser {
+public class TestUser_UsingInterface {
 
     @Test(enabled=true)
     public void TestSelectAll() throws IOException {
@@ -24,7 +24,12 @@ public class TestUser {
         // SqlSessionFactory -> SqlSession
         SqlSession session = sqlSessionFactory.openSession();
         try {
-            List<User> userlist = session.selectList("com.elements.user.mapper.getAllUser");
+            // !!!! Calling Manner is Different
+            // this is the xml manner:
+            // List<User> userlist = session.selectList("com.elements.user.mapper.getAllUser");
+            // this is the interface manner:
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            List<User> userlist = userMapper.getAllUser();
             System.out.println(userlist);
             Assert.assertTrue(false);
         }catch(Exception e){
@@ -41,7 +46,13 @@ public class TestUser {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession session = sqlSessionFactory.openSession();
         try {
-            User user = (User) session.selectOne("com.elements.user.mapper.getUserById", "1");
+            // !!!! Calling Manner is Different
+            // this is the xml manner:
+            // User user = (User) session.selectOne("com.elements.user.mapper.getUserById", "1");
+            // this is the interface manner:
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            User user = userMapper.getUserById("1");
+
             System.out.print(user);
             Assert.assertTrue(false);
         } finally {
@@ -60,9 +71,15 @@ public class TestUser {
             user.setUserName("abc");
             user.setUserEmail("aaaaa");
 
-            session.update("com.elements.user.mapper.insert", user);
+            // !!!! Calling Manner is Different
+            // this is the xml manner:
+            // session.update("com.elements.user.mapper.insert", user);
+            // this is the interface manner:
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            int i = userMapper.insert(user);
+
             session.commit();
-//            Assert.assertTrue(false);
+            //Assert.assertTrue(false);
         } finally {
             session.close();
         }
@@ -76,13 +93,19 @@ public class TestUser {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             User user = new User();
-            user.setUserId(26);
+            user.setUserId(30);
             user.setUserName("aabaa");
             user.setUserEmail("bbcbb");
 
-            session.update("com.elements.user.mapper.update", user);
+            // !!!! Calling Manner is Different
+            // this is the xml manner:
+            // session.update("com.elements.user.mapper.update", user);
+            // this is the interface manner:
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            int i = userMapper.update(user);
+
             session.commit();
-//            Assert.assertTrue(false);
+            //Assert.assertTrue(false);
         } finally {
             session.close();
         }

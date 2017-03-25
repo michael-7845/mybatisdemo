@@ -19,6 +19,18 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="UserMapper.xml" />
+        <!-- 通过mapper元素的resource属性可以指定一个相对于类路径的Mapper.xml文件 -->
+        <!-- 1. xml <mapper resource="UserMapper.xml" />  -->
+
+        <!-- 通过mapper元素的url属性可以指定一个通过URL请求道的Mapper.xml文件 -->
+        <!-- 1.b url <mapper url="file:///E:/java/idea-workspace/mybatisdemo/src/main/resources/UserMapper.xml" />  -->
+
+        <!-- 通过mapper元素的class属性可以指定一个Mapper接口进行注册 -->
+        <!-- 2. interface annotation: <mapper class="com.elements.user.mapper.UserMapper" />  -->
+
+        <!-- 通过package元素将会把指定包下面的所有Mapper接口进行注册 -->
+        <!-- 2.b interface annotation using package: <package name="com.elements.user.mapper" />  -->
+
+        <mapper url="file:///E:/java/idea-workspace/mybatisdemo/src/main/resources/UserMapper.xml" />
     </mappers>
 </configuration>

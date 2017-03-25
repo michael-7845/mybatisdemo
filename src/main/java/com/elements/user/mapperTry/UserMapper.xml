@@ -2,8 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- no interface -->
-<mapper namespace="com.elements.user.mapper">
+<!-- interface demo -->
+<!-- Not Run Okey!!!!!!!! -->
+<mapper namespace="com.elements.user.mapperTry.UserMapper">
 
     <resultMap type="com.elements.user.model.User" id="usermap">
         <id column="userId" property="userId"/>
